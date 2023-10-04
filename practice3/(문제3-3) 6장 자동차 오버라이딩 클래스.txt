@@ -1,0 +1,63 @@
+(문제3-3) 6장 자동차 오버라이딩 클래스
+------------------------------------------
+2개 클래스(Vehicle, Car)에서 Car은 Vehicle의 자식클래스이다. 각 클래스는 다음과 같은 필드와 메소드를 가지고 있다.
+
+class Vehicle
+-------------
+    (필드)  String color  // 차량 색깔
+              int speed     // 차량 속도
+    (생성자) Vehicle(String color, int speed)  // 차량의 색깔과 속도 초기화
+    (메소드) void show()  // 차량의 색깔과 속도 출력
+
+class Car
+---------
+    (필드)  int displacement  // 자동차 배기량
+              int gears            // 자동차 기어 단수
+    (생성자) Car(String color, int speed, int displacement, int gears)  // 자동차 색깔, 속도, 배기량, 기어 단수 초기화
+    (메소드) void show()  // 자동차의 색깔, 속도, 배기량, 기어 단수 출력
+
+
+위의 2개 클래스를 다음과 같은 프로그램으로  테스트하고자 한다.
+
+public class Practice3 {
+    public static void main(String[] args) {
+
+        // (문제3-1) 테스트코드 시작 위치
+        ....
+
+        //  ((문제3-2) 테스트코드 시작 위치
+        ....
+
+        //  ((문제3-3) 테스트코드 시작 위치
+
+        Vehicle v = new Vehicle("실버", 150);
+        v.show();
+		
+        System.out.println();
+        Car c = new Car("파랑", 200, 1000, 5);
+        c.show();
+
+        System.out.println();
+        Vehicle v2 = c;
+        v2.show();
+     }
+}
+
+
+다음과 같은 결과가 출력되도록 2개 클래스를 구현하라.
+
+(실행결과) -----------------------------------------------
+
+---(문제3-3)---
+색상 : 실버
+속도 : 150
+
+자동차 색상 : 파랑
+자동차 속도 : 200
+자동차 배기량 : 1000
+자동차 기어 단수 : 5
+
+자동차 색상 : 파랑
+자동차 속도 : 200
+자동차 배기량 : 1000
+자동차 기어 단수 : 5
