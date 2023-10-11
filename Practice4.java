@@ -1,5 +1,5 @@
-
-// (¹®Á¦4-1)
+import java.io.*;
+// (ë¬¸ì œ4-1)
 interface Queue {
 	void enqueue(int item);
 	int dequeue();
@@ -19,60 +19,77 @@ class MyQueue implements Queue {
 	}
 
 	public void enqueue(int item) {
-		
-		// (¹®Á¦4-1) ±¸Çö À§Ä¡
 
+		// (ë¬¸ì œ4-1) êµ¬í˜„ ìœ„ì¹˜
+		if(back == capacity) {
+			System.out.println("queue is full... increasing capacity from " +  Integer.valueOf(capacity).toString() + " to " + Integer.valueOf(capacity + 3).toString());
+			int tmp[] = new int[capacity];
+			for(int i = front; i < capacity; i++) tmp[i] = queue[i];
+			capacity += INC_SIZE;
+			queue = new int[capacity];
+			for(int i = front; i < capacity - 3; i++) queue[i] = tmp[i];
+		}
+		queue[back++] = item;
 	}
 
 	public int dequeue() {
-		
-		// (¹®Á¦4-1) ±¸Çö À§Ä¡
 
+		// (ë¬¸ì œ4-1) êµ¬í˜„ ìœ„ì¹˜
+		if(isEmpty()) {
+			System.out.println("Queue is Empty");
+			return -1;
+		} else {
+			return queue[front++];
+		}
 	}
 
 	public void display() {
-		
-		// (¹®Á¦4-1) ±¸Çö À§Ä¡
-
+		// (ë¬¸ì œ4-1) êµ¬í˜„ ìœ„ì¹˜
+		if(isEmpty()) {
+			System.out.println("Queue is Empty");
+		} else {
+			System.out.print("[ ");
+			for(int i = front; i < back; i++) System.out.print(Integer.valueOf(queue[i]).toString() + " ");
+			System.out.println("]");
+		}
 	}
 
 	@Override
 	public boolean isEmpty() {
-		
-		// (¹®Á¦4-1) ±¸Çö À§Ä¡
+		// (ë¬¸ì œ4-1) êµ¬í˜„ ìœ„ì¹˜
+		return front >= back;
+	}
+}
+
+
+// (ë¬¸ì œ4-2)
+class CardDeck implements java.util.Iterator {
+	private static String[] cardNames = {
+			"2", "3", "4", "5", "6", "7", "8", "9",
+			"10", "Jack", "Queen", "King", "Ace" };
+	private int current = 0;
+
+	public boolean hasNext() {
+
+		// (ë¬¸ì œ4-2) êµ¬í˜„ ìœ„ì¹˜
+		return current < cardNames.length;
+	}
+
+	public Object next() {
+
+		// (ë¬¸ì œ4-2) êµ¬í˜„ ìœ„ì¹˜
+		return cardNames[current++];
+	}
+
+	public void remove() {
+
+		// (ë¬¸ì œ4-2) êµ¬í˜„ ìœ„ì¹˜
 
 	}
 }
 
 
-// (¹®Á¦4-2)
-class CardDeck implements java.util.Iterator {
-    private static String[] cardNames = {
-             "2", "3", "4", "5", "6", "7", "8", "9",
-	     "10", "Jack", "Queen", "King", "Ace" };
-    private int current = 0;
-    
-    public boolean hasNext() {
-		
-		// (¹®Á¦4-2) ±¸Çö À§Ä¡
-
-    }
-    
-    public Object next() {
-		
-		// (¹®Á¦4-2) ±¸Çö À§Ä¡
-
-    }
-    
-    public void remove() {    	
-		
-		// (¹®Á¦4-2) ±¸Çö À§Ä¡
-
-    }
-}
-
-
-// (¹®Á¦4-3)
+// (ë¬¸ì œ4-3)
 interface GetInfo {
 	double getValue();
 	static double average(GetInfo[] objects) { return 0; }
@@ -82,30 +99,33 @@ class Student implements GetInfo {
 	double score;
 
 	public Student(double score) {
-		
-		// (¹®Á¦4-3) ±¸Çö À§Ä¡
 
+		// (ë¬¸ì œ4-3) êµ¬í˜„ ìœ„ì¹˜
+		this.score = score;
 	}
 
 	@Override
 	public double getValue() {
-		
-		// (¹®Á¦4-3) ±¸Çö À§Ä¡
 
+		// (ë¬¸ì œ4-3) êµ¬í˜„ ìœ„ì¹˜
+		return score;
 	}
 
 	public static double average(GetInfo[] objects) {
-		
-		// (¹®Á¦4-3) ±¸Çö À§Ä¡
 
+		// (ë¬¸ì œ4-3) êµ¬í˜„ ìœ„ì¹˜
+		double avg = 0;
+		for(GetInfo i : objects) avg += i.getValue();
+		avg /= objects.length;
+		return avg;
 	}
 }
 
 
 public class Practice4 {
 	public static void main(String[] args) {
-    	// (¹®Á¦4-1)
-		System.out.println("---(¹®Á¦4-1)---");
+		// (ë¬¸ì œ4-1)
+		System.out.println("---(ë¬¸ì œ4-1)---");
 		MyQueue q = new MyQueue(3);
 		q.display();
 		q.enqueue(10);
@@ -138,24 +158,24 @@ public class Practice4 {
 		q.dequeue();
 		q.display();
 
-    	// (¹®Á¦4-2)
-		System.out.println("\n---(¹®Á¦4-2)---");
-        System.out.println("(Ã¹¹øÂ° ¸®µù)");
+		// (ë¬¸ì œ4-2)
+		System.out.println("\n---(ë¬¸ì œ4-2)---");
+		System.out.println("(ì²«ë²ˆì§¸ ë¦¬ë”©)");
 		CardDeck c = new CardDeck();
-        while (c.hasNext()) {
-        	String s = (String) c.next();
-        	if(s.equals("Jack"))
-        		c.remove();
-            System.out.println("next()°¡ ¹ÝÈ¯ÇÏ´Â °ª:"+ s);
-        }
-        System.out.println("\n(µÎ¹øÂ° ¸®µù)");
+		while (c.hasNext()) {
+			String s = (String) c.next();
+			if(s.equals("Jack"))
+				c.remove();
+			System.out.println("next()ê°€ ë°˜í™˜í•˜ëŠ” ê°’:"+ s);
+		}
+		System.out.println("\n(ë‘ë²ˆì§¸ ë¦¬ë”©)");
 		c = new CardDeck();
-        while (c.hasNext()) {
-            System.out.println("next()°¡ ¹ÝÈ¯ÇÏ´Â °ª:"+ c.next());
-        }
+		while (c.hasNext()) {
+			System.out.println("next()ê°€ ë°˜í™˜í•˜ëŠ” ê°’:"+ c.next());
+		}
 
-    	// (¹®Á¦4-3)
-		System.out.println("\n---(¹®Á¦4-3)---");
+		// (ë¬¸ì œ4-3)
+		System.out.println("\n---(ë¬¸ì œ4-3)---");
 		Student[] list = new Student[3];
 		list[0] = new Student(10.0);
 		list[1] = new Student(20.0);
